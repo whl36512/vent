@@ -1,0 +1,53 @@
+@* @(form: Form[Msg])(implicit request: RequestHeader, m: Messages) *@
+
+
+@(form: Form[Msg])(implicit request: RequestHeader, m: Messages)
+
+
+<div class=formentry>
+
+@if(form.hasGlobalErrors) {
+  <ul>
+  @for(error <- form.globalErrors) {
+    <li>@Messages(error.key) @Messages(error.messages, error.args)</li>
+  }
+  </ul>
+}
+
+@request.flash.get("success").getOrElse("")
+
+@helper.form(action = routes.Application.commentPost()) {
+	
+	
+ @* @helper.CSRF.formField*@
+
+	@helper.textarea(form("content"), 'rows -> 20, 'cols -> 100,  '_label -> "Enter your comment below", '_help -> "Accept HTML tags, such as table,list, hyper link. No scripts")
+     <button type="submit" value="submit" >Send</button>
+}
+</div>
+
+@*
+	@helper.input(form("linkId"), '_label -> "") { (id, name, value, args) =>
+    	<input type="hidden" name="@name" id="@id" value="@value" @toHtmlArgs(args)>
+	}
+	@helper.input(form("parentMsgId"), '_label -> "") { (id, name, value, args) =>
+    	<input type="hidden" name="@name" id="@id" value="@value" @toHtmlArgs(args)>
+	}
+
+*@
+
+<div class=formentry>
+	<form action="/comment" method="POST" >
+		<dl class=" " id="content_field">
+    		<dt><label for="content">Enter your comment below</label></dt>
+    		<dd>
+			    <textarea id="content" name="content" rows="20" cols="100"></textarea>
+			</dd>
+    		<dd class="info">Accept HTML tags, such as table,list, hyper link. No scripts</dd>
+    
+		</dl>
+     <button type="submit" value="submit" >Send</button>
+	</form>
+</div>
+
+

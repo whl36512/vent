@@ -1,0 +1,72 @@
+@(form: Form[Msg])(implicit request: RequestHeader, m: Messages)
+
+
+@main("Welcome to Vent, the Annonymous Comment Hub") {
+	
+	<script type="text/javascript">
+	function toggleTable() {
+	    var lTable = document.getElementById("loginTable");
+	    lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
+	}
+</script>
+	
+	
+<div class=formentry>
+
+@if(form.hasGlobalErrors) {
+	has globale errors 
+  <ul>
+  @for(error <- form.globalErrors) {
+    <li>@Messages(error.key) @Messages(error.messages, error.args)</li>
+  }
+  </ul>
+}
+
+@if(form.hasErrors) {
+	 has errors
+   <ul>
+  @for(error <- form.errors) {
+    <li>@Messages(error.key) @Messages(error.messages, error.args)</li>
+  }
+  </ul>
+}
+
+@request.flash.get("success").getOrElse("")
+
+@helper.form(action = routes.Application.commentConfirmPost()) {
+	
+	
+ @* @helper.CSRF.formField*@
+ 	<dl>
+ 		<dt>
+		Your comment:
+		<hr/>
+		</dt>
+		<dd>
+			<div style="white-space: pre-line">@Html(form("content").value.getOrElse(""))</div>
+		</dd>
+		<dt>
+			<hr/>
+			will be created <br/>
+    		<button type="submit" value="submit" >Confirm</button>
+    	</dt>
+ 	</dl>
+	
+}
+</div>
+}
+@*
+	@helper.input(form("linkId"), '_label -> "") { (id, name, value, args) =>
+    	<input type="hidden" name="@name" id="@id" value="@value" @toHtmlArgs(args)>
+	}
+	@helper.input(form("parentMsgId"), '_label -> "") { (id, name, value, args) =>
+    	<input type="hidden" name="@name" id="@id" value="@value" @toHtmlArgs(args)>
+	}
+	@helper.input(form("content"), '_label -> "" , '_showConstraints -> false) { (id, name, value, args) =>
+    	<input type="hidden" name="@name" id="@id" value="@value" @toHtmlArgs(args)>
+	}
+
+*@
+
+
+

@@ -1,0 +1,70 @@
+@* topiclist Template File *@
+
+
+@import play.api.db.Database
+@import models.Link
+
+@(db: Database)(implicit request: RequestHeader, m: Messages)
+
+@import java.lang.String ; var priorTopicId=""  // a variable has to be defined with an import statement
+
+
+@main("Welcome to Vent, the Annonymous Comment Hub") {
+<dl>
+<dt>
+	@{//newtopic("Suggest a news article", "null")
+		}
+   	</dt>
+</dl>
+
+	@for(l <- Link.select(db, request)){
+   		@{
+   			// request may have searchQuery
+   		}
+   		
+	   	<dl>
+   			<dt>
+				@if( l("rk_link").equals("1")){
+					<hr/>
+					<a href='comments?topicId=@l("topic_id")' class="whlbutton" >
+						<img src="/assets/images/observe.svg" alt=See class=observeicon>
+			 			View @l("total") comments in this group of articles
+			 		</a>
+					&nbsp; &nbsp;
+					@{//newtopic("Suggest a similar news article", l("topic_id"))
+					}
+				}
+	   		</dt>
+
+   			<dd>
+   				<span class='title linkrank@l("rk_link")' >
+   					@l("title")
+   				</span>   		
+   				<a href ='@l("url")' target="_blank"> 
+   					<img src="/assets/images/external-link-symbol.svg" alt="Linkout" title="Read it" class=linkouticon>
+	   	 		</a>
+   	 	
+   				<dl>
+   					<dd class=date>
+   						by @l("author"), @Link.getOrgByURL(l("url")), @l("publish_ts")
+   					</dd> 
+   					<dd>
+	   					<a href='/comments?linkId=@l("link_id")' class=whlbutton>
+   							<img src="/assets/images/observe.svg" alt=See class=observeicon />
+   							View @l("comment_cnt") Comments
+   						</a> 
+   					</dd>
+	   			</dl>
+   			</dd>
+   		</dl>
+    }
+}
+
+
+@newtopic(wording: String, topicId: String) = {
+	<a href="#/" id="@topicId" class=whlbutton onClick="toggleDisply(this.id);" >
+		<img src="/assets/images/add-file-interface-symbol-of-paper-sheet-with-text-lines-and-plus-sign.svg" class=addfileicon />
+ 		@wording
+ 	</a>
+   	@newtopicform(topicId)
+}

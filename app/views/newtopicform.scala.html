@@ -1,0 +1,51 @@
+@(topicId: String)(implicit request: RequestHeader, m: Messages)
+
+@import java.time.LocalDate
+
+<div id=toggle@topicId style="display:none" class=toggle>
+<dl>
+<dd>
+<div class=formentry>
+<br/>
+
+<form action="/savetopic" method="POST" >
+    <input type="hidden" name="topicId" id="topicId" value="@topicId" >
+<dl class=" error" id="url_field">
+    <dt><label for="url">URL of a News Article (required)</label></dt>
+    <dd>
+    	<input type="text" id="url" name="url" value="" size="100" placeholder="URL of a News Article"  />
+    </dd>
+</dl>
+<dl class=" error" id="title_field">
+    <dt><label for="title">Title</label></dt>
+    <dd>
+    	<input type="text" id="title" name="title" value="" size="100" placeholder="Title of a News Article"/>
+	</dd>
+</dl>
+<dl class=" error" id="url_field">
+	<dt><label for="author">Authors</label></dt>
+    <dd>
+    	<input type="text" id="author" name="author" value="" size="100" placeholder="Authors of a News Article"/>
+	</dd>
+</dl>
+<dl class=" error" id="publishTS_field">
+    <dt><label for="publishTS">Publication Date and Time</label></dt>
+    <dd>
+    <input type="datetime-local" id="publishTS" name="publishTS" value="@{LocalDate.now.toString()} 12:00:00" size="19"/>
+</dd>
+  
+    
+</dl>
+
+
+<br/>
+<input type="button" value="Add New Article" onClick="submitForm(this.parentNode, validateTopicForm);" />
+<br/>
+<br/>
+</form>
+
+
+</div>
+</dd>
+</dl>
+</div>

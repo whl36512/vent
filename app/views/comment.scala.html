@@ -1,0 +1,34 @@
+@* @(form: Form[Msg])(implicit request: RequestHeader, m: Messages) *@
+
+
+@(linkId: String, msgId: String)(implicit request: RequestHeader, m: Messages)
+
+
+
+<div id=toggle@msgId@linkId style="display:none" class="toggle">
+<dl>
+<dd>
+<div class=formentry>
+
+<form method="POST" action="/savecomment">
+    <input type="hidden" value="@linkId"   name="linkId" />
+    <input type="hidden" value="@msgId"   name="msgId" />
+    
+		<dl class=" " id="content_field">
+    		<dt>
+			    <textarea name="content" rows="8" placeholder="Enter your comment here"></textarea>
+			</dt>
+    		<dt class="info">Minimum 30, maximum 4000 characters</dt>
+    
+		</dl>
+		<input type="button" name="submit" value="Send" onClick="submitForm(this.parentNode, validateCommentForm);" >
+		<br/>
+		<br/>
+</form>
+</div>
+</dd>
+</dl>
+
+</div>
+
+

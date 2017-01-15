@@ -1,0 +1,101 @@
+@* comments Template File *@
+
+@import models.Msg
+@import play.api.db.Database
+
+
+
+@(db: Database, linkId: String, topicId:String)(implicit request: RequestHeader, m: Messages)
+
+@indentOpen( level:String )  = @{ 
+	var out =""
+	for (i <- 1 until level.toInt)  {
+	out +="<dl><dd>"
+	}
+	out
+}
+
+@indentClose( level:String ) = @{ 
+	var out = ""
+	for (i <- 1 until level.toInt)  {
+	out+= "</dd></dl>"
+	}
+	out
+}
+
+
+@main("Welcome to Vent, the Annonymous Comment Hub") {
+
+@for(l <- Link.select(db, linkId, topicId)) {
+		@* there is only one row *@
+	
+   	<dl>
+   	<dt class=title>
+   	@l("title")
+   	<a href ='@l("url")' target="_blank"> 
+   	<img src="/assets/images/external-link-symbol.svg" alt="Linkout" title="Read it" class=linkouticon>
+   	 </a>
+   	</dt>
+   	<dd class=date>
+   	by @l("author"), @Link.getOrgByURL(l("url")), @l("publish_ts") </dd>
+   	<dd class=commentcount>
+   	@if(!(linkId==null || linkId.equals("") || linkId.equals("null"))){
+   		@l("comment_cnt") comments
+   	}
+   	
+   	@if(linkId==null || linkId.equals("") || linkId.equals("null")){
+   		<a href='/comments?linkId=@l("link_id")' class=whlbutton>
+   			<img src="/assets/images/observe.svg" alt=See class=observeicon />
+   			@l("comment_cnt") comments
+   		</a>
+   	}
+   	
+   	&nbsp; &nbsp;
+   	<a id='@l("link_id")' onclick="toggleDisply(this.id);" href="#/" class="whlbutton">
+   		<img src="/assets/images/chat-comment-oval-speech-bubble-with-text-lines.svg" alt=Add class=commenticon />
+   		Comment
+   	</a> 
+   	</dd>
+   	@comment(l("link_id"), "")
+   	</dl>
+    }
+
+
+
+	@for(l <- Msg.selectOrderByTime(db, linkId, topicId)){   
+
+		@Html(indentOpen(level= l("level")) )
+
+ 
+		<div class=commentblock>
+		<dl>
+    		<dt class="date" >
+    	    	<hhr/>
+    			on @l("create_ts")
+    			&nbsp; &nbsp; 
+    			@if(l("level").toInt <= 4) {
+    			 
+	    			<a id='@l("msg_id")' onclick="toggleDisply(this.id);" href="#/" class="whlbutton">
+    				<img src="assets/images/arrow-pointing-to-right.svg" alt="Reply" title="Reply" class="replyicon" />
+    				</a>
+    				&nbsp; &nbsp;
+    			}
+    			<a href="#/" id='@l("msg_id")' class=whlbutton onClick="flag(this.id)">
+    			<img src=/assets/images/flag.svg alt=Flag title="Flag abusive comment" class=flagicon />
+    			</a>
+    		
+				@if(l("level").equals("1") && (linkId==null || linkId.equals("") || linkId.equals("null")) ) { 
+					@{//print title for level 1 and topic level listing
+					}
+					<br/>on @l("title")
+				}
+    			</dt>
+    			<dt> <div style="white-space: pre-line" class=comment>@l("content")</div>
+    			</dt>
+    	</dl>
+    	</div>
+    	@comment("", l("msg_id"))
+		@Html(indentClose(level= l("level"))) 
+   	}
+ }
+ 

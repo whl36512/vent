@@ -1,0 +1,138 @@
+@(topicId: String)(implicit request: RequestHeader, m: Messages)
+
+
+
+
+<div id=toggle@topicId style="display:none">
+<h4>Enter URL link of a news article</h4>
+<div class=formentry>
+All fields are required
+<form action="/newtopic" method="POST" >
+    <input type="hidden" name="topicId" id="topicId" value="785b906a-baed-4cbb-9bfd-594710d9a2ff" >
+<dl class=" error" id="url_field">
+    <dt><label for="url">URL of a News Article</label></dt>
+    <dd>
+    	<input type="text" id="url" name="url" value="" size="100"/>
+	</dd>
+</dl>
+<dl class=" error" id="title_field">
+    <dt><label for="title">Title</label></dt>
+    <dd>
+    	<input type="text" id="title" name="title" value="" size="100"/>
+	</dd>
+</dl>
+<dl>
+	<dt><label for="author">Authors</label></dt>
+    <dd>
+    	<input type="text" id="author" name="author" value="" size="100"/>
+	</dd>
+</dl>
+<dl class=" error" id="publishTS_field">
+    <dt><label for="publishTS">Publication Date and Time</label></dt>
+    <dd>
+    <input type="text" id="publishTS" name="publishTS" value="" size="19"/>
+</dd>
+        <dd class="info">Format: YYYY-MM-DD HH:mm:SS</dd>
+    
+</dl>
+
+
+
+<button type="button" value="submit" onClick="submitForm(this.parentNode);" >Add New Article</button>
+
+</form>
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h4>Enter URL link of a news article</h4>
+
+<div id=toggle style="display:none">
+    	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+<div class=formentry>
+
+@if(form.hasGlobalErrors) {
+  <ul>
+  @for(error <- form.globalErrors) {
+    <li>@Messages(error.key) @Messages(error.messages, error.args)</li>
+  }
+  </ul>
+}
+
+@request.flash.get("success").getOrElse("")
+
+
+
+@helper.form(action = routes.Application.newTopicPost()) {
+ @* @helper.CSRF.formField*@
+     
+ @helper.input(form("topicId"), '_label -> "", '_showConstraints -> false) { (id, name, value, args) =>
+    <input type="hidden" name="@name" id="@id" value="@value" @toHtmlArgs(args)>
+}
+ 
+  @helper.inputText(form("url"), 'size -> "100", '_label -> "URL of a News Article", '_showConstraints -> false )
+  @helper.inputText(form("title"),'size -> "100", '_label -> "Title", '_showConstraints -> false)
+  @helper.inputText(form("author"), 'size -> "100",'_label -> "Authors", '_showConstraints -> false)
+  @helper.inputText(form("publishTS"),'size -> 19, '_label -> "Publication Date and Time", '_help -> "Format: YYYY-MM-DD HH:mm:SS", '_showConstraints -> false)
+  <dl>
+  	<dd>
+  			<button type="button" value="submit" onClick="submitForm(this.parentNode);" >Add New Article</button>
+  	</dd>
+  </dl>
+}
+
+</div>
+</div>
+

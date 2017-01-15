@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Linux (vers 25 March 2009), see www.w3.org" />
+
+  <title></title>
+</head>
+
+<body>
+  @* topiclist Template File *@ @import play.api.db.Database
+  @import models.Link @(db: Database)(implicit request:
+  RequestHeader, m: Messages) @import java.lang.String ; var
+  priorTopicId="" // a variable has to be defined with an import
+  statement @main("Welcome to Vent, the Annonymous Comment Hub") {
+  <a href="#" id="null" class="whlbutton" onclick=
+  "toggleDisply(this.id);" name="null"><img src=
+  "/assets/images/add.svg" alt="Add" class="addicon" /> a new news
+  article</a> @newtopicform("null") @for(l &lt;- Link.select(db,
+  request)){ @{// request may have searchQuery }
+
+  <dl>
+    <dt>@if( ! l("topic_id").equals(priorTopicId)){ @{
+    priorTopicId= l("topic_id") }</dt>
+
+    <dd>
+      <hr />
+    </dd>
+
+    <dt><a href="comments?topicId=@l(&quot;topic_id&quot;)" class=
+    "whlbutton"><img src="/assets/images/observe.svg" alt="See"
+    class="observeicon" /> @l("total") comments in this group of
+    articles</a> &nbsp; &nbsp; <a href="#" id=
+    "@l(&quot;topic_id&quot;)" class="whlbutton" onclick=
+    "toggleDisply(this.id);" name=
+    "@l(&quot;topic_id&quot;)"><img src="/assets/images/add.svg"
+    alt="Add" class="addicon" /> a similar news article</a>
+    @newtopicform(l("topic_id")) }</dt>
+
+    <dd class="title">
+      @l("title") <a href="@l(" target="_blank"><img src=
+      "/assets/images/external-link-symbol.svg" alt="Linkout"
+      class="linkouticon" /></a>
+
+      <dl>
+        <dd class="date">by @l("author"),
+        @Link.getOrgByURL(l("url")), @l("publish_ts")</dd>
+
+        <dd><a href="/comments?linkId=@l(&quot;link_id&quot;)"
+        class="whlbutton"><img src="/assets/images/observe.svg"
+        alt="See" class="observeicon" /> @l("comment_cnt")
+        Comments</a></dd>
+      </dl>
+    </dd>
+  </dl>} }
+</body>
+</html>

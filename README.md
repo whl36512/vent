@@ -47,3 +47,13 @@ Filters
 - ExampleFilter.scala
 
   A simple filter that adds a header to every response.
+
+
+Production Deployment
+=====================
+
+- $sbt universal:packageZipTarball
+
+- untar files at production server and 
+
+- $my-first-app-1.0/bin/my-first-app -Dplay.crypto.secret=mysecret

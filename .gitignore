@@ -10,3 +10,6 @@ target
 /.settings
 /RUNNING_PID
 .git
+.cache-main
+.cache-tests
+

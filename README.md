@@ -53,6 +53,7 @@ Production Deployment
 =====================
 
 - $sbt universal:packageZipTarball
+- copy ./target/universal/vent-1.0-SNAPSHOT.tgz to poduction server
 
 - untar files at production server and 
 

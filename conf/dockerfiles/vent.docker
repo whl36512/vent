@@ -1,5 +1,5 @@
 FROM local/centos7-systemd
-MAINTAINER "Weihan Lin" <whl36512@gmail.com>
+MAINTAINER "you" <your@email.here>
 ENV container docker
 
 RUN yum install -y java

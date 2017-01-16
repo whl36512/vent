@@ -54,6 +54,11 @@ class Application @Inject() (implicit val cached: Cached, implicit val cache: Ca
   def about = Action {
     Ok(views.html.about())
   }
+  
+  def terms = Action {
+    Ok(views.html.terms())
+  }
+  
 
   def topicList = {
     val caching = cached.status({ r: RequestHeader => r.uri }, 200, 10).includeStatus(404, 100)
@@ -154,7 +159,7 @@ class Application @Inject() (implicit val cached: Cached, implicit val cache: Ca
     val ipHash = Msg.hashIp(request.remoteAddress)
     val userThrottle = cache.get[UserThrottle](ipHash).getOrElse(UserThrottle())
     if (userThrottle.commentThrottle.isBlocked) {
-      Ok("ERROR 20161229134526: Comment blocked. Reason: Too frequently")
+      BadRequest("ERROR 20161229134526: Comment blocked. Reason: Too frequently")
     } else {
       val queryString = request.body.asFormUrlEncoded.get.map { case (k, v) => (k, v(0)) } // get form data from POST
 
@@ -168,7 +173,7 @@ class Application @Inject() (implicit val cached: Cached, implicit val cache: Ca
           cache.set(ipHash, userThrottle, 60.minutes)
           Ok("Result: " + result + """ comment saved. """)
         }
-        case error => Ok(error)
+        case error => BadRequest(error)
       }
     }
   }

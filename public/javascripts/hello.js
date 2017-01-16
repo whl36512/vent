@@ -39,6 +39,8 @@ function alertContents(httpRequest) {
 	if (httpRequest.readyState === XMLHttpRequest.DONE) {
 		if (httpRequest.status === 200) {
 			alert(httpRequest.responseText);
+			window.location.reload(true); 
+			
 		} 
 		else {
 			alert('ERROR: return status'+ httpRequest.status);

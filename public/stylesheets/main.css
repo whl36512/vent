@@ -50,6 +50,17 @@ div.comment {
 	font-size:1rem;
 	color:black;
 }
+div.terms {
+	font-family: calibri,tahoma,arial,sans-serif ;
+	font-size:1rem;
+	color:black;
+}
+div.about {
+	font-family: calibri,tahoma,arial,sans-serif ;
+	font-size:1rem;
+	color:black;
+}
+
 
 div.credit {
 	font-family: calibri,tahoma,arial,sans-serif ;

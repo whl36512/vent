@@ -199,18 +199,27 @@ dd {
 *.toggle {
 		border: 1px solid #ccc;
 		margin: 0.5rem auto;
+		display:none;
+		
 }
 
-#menu {
+div#menu {
   position: fixed;
   z-index: 1;
   right: 1rem;
   top: 1rem;
-  width: 8rem;
+  width: 3.5rem;
   height: 8rem;
   mmargin-top: -2.5em;
-  font-family: calibri,tahoma,arial,sans-serif;
 }
+
+div#toggle-pulldownmenu {
+	display:none;
+	border: 0px solid #ccc;
+	margin:0rem;
+	padding:0rem;
+	float:right;
+	}
 
 #footer {
   position: fixed;
@@ -226,21 +235,26 @@ dd {
 }
 
 
-*.menuitem {
+td.menuitem, a.menuitem {
 	font-family: calibri,tahoma,arial,sans-serif ;
-	font-size:1.2rem;
+	font-size:1.1rem;
 	color: black;
 	text-decoration: none ; 
 	background-color:lightgrey;
 }
 
+table.menu {
+	margin:0rem;
+	padding:0rem;
+    border: 0px solid red;
+    border-collapse: collapse;
+}
 
 
-div.menuline {
-    width: 1rem;
-    height: 0.2rem;
-    background-color: grey;
-    margin: 0.1rem 0;
+
+
+div#pulldownmenubutton {
+	text-align:right;
 }
 
 div.searchform {

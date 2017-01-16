@@ -14,7 +14,7 @@ if (window.console) {
 
 function toggleDisply(id) {
 	// alert("id=" + id)
-	var elem = document.getElementById("toggle" + id);
+	var elem = document.getElementById("toggle-" + id);
 	// alert("elem=" + elem)
 	elem.style.display = (elem.style.display == "block") ? "none" : "block";
 	false;

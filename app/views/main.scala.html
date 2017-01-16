@@ -73,25 +73,32 @@
 
 @pulldownmenu = {
 <div id=menu>
-<div align="right">
-	<a id=pulldownmenu onclick="toggleDisply(this.id);" href="#/" class="whlbutton" >
+	<div id=pulldownmenubutton>
+	<a  onclick='toggleDisply("pulldownmenu");' href="#/" class="whlbutton" >
 	    				<img src="assets/images/menu-button-of-three-horizontal-lines.svg" alt="Menu" title="menu" class="menuicon" />
 	</a>
+	</div>	
+	<div id="toggle-pulldownmenu"  class="toggle"  >
+	<table class=menu>
+		<tr>
+			<td class="menuitem"><a href="/" class="menuitem" >Home</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="menuitem"><a href="/about" class="menuitem">About</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="menuitem"><a href="/terms" class="menuitem">Legal&nbsp;</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="menuitem"><a href="/credit" class="menuitem" target="_blank">Credit</a>
+			</td>
+		</tr>
+	</table>
+	</div>
 	
-	<div id=togglepulldownmenu style="display:none" class="toggle" >
-		<dl>
-			<dt><a href="/" class="menuitem" >Home</a>
-			</dt>
-			<dt><a href="/about" class="menuitem">About Us</a>
-			</dt>
-			<dt><a href="/terms" class="menuitem">Terms of Use</a>
-			</dt>
-			<dt><a href="/credit" class="menuitem" target="_blank">Credit</a>
-			</dt>
-			
-		</dl>
-	</div>
-	</div>
 </div>
 }
 

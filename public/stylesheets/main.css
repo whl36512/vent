@@ -133,7 +133,7 @@ span.title.linkrank1 {
 	color:grey;
 }
 
-*.formentry {
+div.formentry {
 	font-family: calibri,tahoma,arial,sans-serif ;
 	font-size:1rem;
 	color:black;
@@ -196,11 +196,11 @@ dd {
 	height:0.7rem;
 }
 
-*.toggle {
-		border: 1px solid #ccc;
-		margin: 0.5rem auto;
-		display:none;
-		
+div.toggle {
+	border: 1px solid #ccc;
+	margin: 0.5rem auto;
+	display:none;
+	box-shadow: -0.3rem 0.3rem 0.2rem #ccc;
 }
 
 div#menu {
@@ -213,7 +213,7 @@ div#menu {
   mmargin-top: -2.5em;
 }
 
-div#toggle-pulldownmenu {
+div#toggleBy-pulldownmenu {
 	display:none;
 	border: 0px solid #ccc;
 	margin:0rem;
@@ -235,23 +235,25 @@ div#toggle-pulldownmenu {
 }
 
 
-td.menuitem, a.menuitem {
-	font-family: calibri,tahoma,arial,sans-serif ;
-	font-size:1.1rem;
-	color: black;
+td.menuitem {
+	background-color:#eee;
+	border: 1px solid #888;
+	padding:0.5rem;
+}
+
+a.menuitem {
 	text-decoration: none ; 
-	background-color:lightgrey;
+	font-family: calibri,tahoma,arial,sans-serif ;
+	color: black;
+	font-size:1.6rem;
 }
 
 table.menu {
 	margin:0rem;
 	padding:0rem;
-    border: 0px solid red;
+    border: 0px solid #888;
     border-collapse: collapse;
 }
-
-
-
 
 div#pulldownmenubutton {
 	text-align:right;

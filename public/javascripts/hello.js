@@ -13,8 +13,10 @@ if (window.console) {
 //})();
 
 function toggleDisply(id) {
-	// alert("id=" + id)
-	var elem = document.getElementById("toggle-" + id);
+	//id comes in as either 12345 or toggleBy-12345. If it already has toggleBy- on it, do not prepend toggleBy- again
+	console.log("toggleDisplay id=" + id)
+	if ( id.indexOf("toggleBy-") != 0 ) id="toggleBy-" + id
+	var elem = document.getElementById(id);
 	// alert("elem=" + elem)
 	elem.style.display = (elem.style.display == "block") ? "none" : "block";
 	false;

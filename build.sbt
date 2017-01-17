@@ -25,5 +25,12 @@ libraryDependencies += "org.json" % "json" % "20160212"
 // https://mvnrepository.com/artifact/commons-codec/commons-codec
 libraryDependencies += "commons-codec" % "commons-codec" % "1.10"
 
+// https://mvnrepository.com/artifact/org.apache.commons/commons-email
+//libraryDependencies += "org.apache.commons" % "commons-email" % "1.4"
+
+
+
+
+libraryDependencies += "com.typesafe.play" % "play-mailer_2.11" % "5.0.0"
 
 

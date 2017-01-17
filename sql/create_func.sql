@@ -204,16 +204,20 @@ $body$
         	from e,a  -- if e has no rows, it means input topic_id does not match the database. So no insert
         	returning *   -- return nothing if url exists or input topic_id doesn't match database
         	)
-	, g as  (
-		select extract(epoch from (clock_timestamp()-create_ts))  elapsed  -- row from newly inserted or
-		from f
-		union
-		select extract(epoch from (clock_timestamp()- l.create_ts))  -- existing row
-		from a, link  l
-		where l.url=a.url
-		)
-	select case when elapsed > 1 then 'The URL already exists in our database' else 'Saved. Our staff will review it and activate it for comments accordingly' end result
-	from g
+        , g as  (
+                select extract(epoch from (clock_timestamp()-create_ts))  elapsed  -- row from newly inserted or
+                        , f.title
+                from f
+                union
+                select extract(epoch from (clock_timestamp()- l.create_ts))  -- existing row
+                        , l.title
+                from a, link  l
+                where l.url=a.url
+                )
+        select case when elapsed > 1 then 'The URL already exists in our database' else 'Saved: ' ||  title end result
+        from g
+
+
 	;
 $body$
 language sql;

@@ -45,7 +45,7 @@ function alertContents(httpRequest) {
 			
 		} 
 		else {
-			alert('ERROR: return status'+ httpRequest.status);
+			alert('ERROR 20170117005623: return status '+ httpRequest.status + "\n" + httpRequest.responseText.replace(/\s+/g,''));
 		}
 	}
 }

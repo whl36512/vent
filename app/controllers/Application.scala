@@ -20,12 +20,16 @@ import play.api.db.Database
 import scala.concurrent.duration._
 import play.api.Logger
 
+import play.api.libs.mailer._
+import java.io.File
+import org.apache.commons.mail.EmailAttachment
+
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
  */
 @Singleton
-class Application @Inject() (implicit val cached: Cached, implicit val cache: CacheApi, implicit val messagesApi: MessagesApi, implicit val db: Database, implicit val ws: WSClient)
+class Application @Inject() (implicit mailerClient: MailerClient, implicit val cached: Cached, implicit val cache: CacheApi, implicit val messagesApi: MessagesApi, implicit val db: Database, implicit val ws: WSClient)
     extends Controller with I18nSupport {
 
   /**
@@ -96,7 +100,17 @@ class Application @Inject() (implicit val cached: Cached, implicit val cache: Ca
     val queryString = request.body.asFormUrlEncoded.get.map { case (k, v) => (k, v(0)) } // get form data from POST
 
     val link = Link(topicId = queryString("topicId"), url = queryString("url"), publishTS = queryString("publishTS"), author = queryString("author"), title = queryString("title"))
-    Ok(link.saveTo(db)(0).get("result").getOrElse("ERROR 20161231130101: Unknown error"))
+    val result = link.saveTo(db)(0).get("result").getOrElse("ERROR 20161231130101: Unknown error")
+    Logger.info("INFO 20170117002912: "+ result)
+    result match {
+      case r if r.startsWith("Saved") => {
+        val sr=sendEmail ("new article:"+ r)
+        Logger.debug("DEBUG 20170117005223: " + sr)
+        Ok(r + "\nOur staff will review it and activate it for comments accordingly")
+      }
+      case r => BadRequest(r) 
+    }
+    
     //    Ok(link.saveTo(db)(0).toString)
     //Redirect(routes.Application.newTopic()).flashing("success" -> ("Successful " + topic.toString))
   }
@@ -217,6 +231,28 @@ class Application @Inject() (implicit val cached: Cached, implicit val cache: Ca
     }
     fieldMap
   }
+  
+  def sendEmail (msg :String) = {
+    //val cid = "1234"
+    val email = Email(
+      subject=msg
+      , from="Mister FROM <whl365121@gmail.com>"
+      , to=Seq("Miss TO <whl365121@gmail.com>")
+    // adds attachment
+//    attachments = Seq(
+//      AttachmentFile("attachment.pdf", new File("/some/path/attachment.pdf")),
+//      // adds inline attachment from byte array
+//      AttachmentData("data.txt", "data".getBytes, "text/plain", Some("Simple data"), Some(EmailAttachment.INLINE)),
+//      // adds cid attachment
+//      AttachmentFile("image.jpg", new File("/some/path/image.jpg"), contentId = Some(cid))
+//    ),
+    // sends text, HTML or both...
+//    bodyText = Some("A text message"),
+//    bodyHtml = Some(s"""<html><body><p>An <b>html</b> message with cid <img src="cid:$cid"></p></body></html>""")
+  )
+    mailerClient.send(email)
+  }
+  
 }
 
 

@@ -1,21 +1,22 @@
-<!-- CSS goes in the document HEAD or added to your external stylesheet -->
-<style type="text/css">
-a {
-    text-decoration: none ; 
-    font-weight:normal !important;
-    color:red !important;
-    font-family: calibri,tahoma,arial,sans-serif;
-    
+
+<!--
+CSS goes in the document HEAD or added to your external stylesheet --> <style type
+	="text/css">a {
+	text-decoration: none;
+	font-weight: normal !important;
+	color: red !important;
+	font-family: calibri, tahoma, arial, sans-serif;
 }
 
 table.gridtable {
-	font-family: calibri,tahoma,arial,sans-serif;
-	font-size:1rem;
-	color:#333333;
-	border-width: 0	px;
+	font-family: calibri, tahoma, arial, sans-serif;
+	font-size: 1rem;
+	color: #333333;
+	border-width: 0px;
 	border-color: #666666;
 	border-collapse: collapse;
 }
+
 table.gridtable th {
 	border-width: 0px;
 	padding: 3px;
@@ -23,6 +24,7 @@ table.gridtable th {
 	border-color: #666666;
 	background-color: #dedede;
 }
+
 table.gridtable td {
 	border-width: 0px;
 	padding: 3px;
@@ -31,136 +33,135 @@ table.gridtable td {
 	background-color: #ffffff;
 }
 
-dialog {  
-    width: 500px;  
-    background:#e8e8e8;
-    border: 1px solid #dadada;
-    font-family:sans-serif;
-    padding: 5px 10px 20px 20px;
-}  
+dialog {
+	width: 500px;
+	background: #e8e8e8;
+	border: 1px solid #dadada;
+	font-family: sans-serif;
+	padding: 5px 10px 20px 20px;
+}
 
 *.date {
-	font-family: calibri,tahoma,arial,sans-serif ;
-	font-size:0.8rem;
-	color:grey;
+	font-family: calibri, tahoma, arial, sans-serif;
+	font-size: 0.8rem;
+	color: grey;
 }
 
 div.comment {
-	font-family: calibri,tahoma,arial,sans-serif ;
-	font-size:1rem;
-	color:black;
-}
-div.terms {
-	font-family: calibri,tahoma,arial,sans-serif ;
-	font-size:1rem;
-	color:black;
-}
-div.about {
-	font-family: calibri,tahoma,arial,sans-serif ;
-	font-size:1rem;
-	color:black;
+	font-family: calibri, tahoma, arial, sans-serif;
+	font-size: 1rem;
+	color: black;
 }
 
+div.terms {
+	font-family: calibri, tahoma, arial, sans-serif;
+	font-size: 1rem;
+	color: black;
+}
+
+div.about {
+	font-family: calibri, tahoma, arial, sans-serif;
+	font-size: 1rem;
+	color: black;
+}
 
 div.credit {
-	font-family: calibri,tahoma,arial,sans-serif ;
-	font-size:1rem;
-	color:black;
-	text-decoration: none ; 
+	font-family: calibri, tahoma, arial, sans-serif;
+	font-size: 1rem;
+	color: black;
+	text-decoration: none;
 }
 
 div.commentblock {
 	border-style: solid;
-    border-color: red green blue #bbf;
-	border-width: 0rem 0rem 0rem 0.2rem;	
+	border-color: red green blue #bbf;
+	border-width: 0rem 0rem 0rem 0.2rem;
 	margin: 0.4rem 0rem 0rem 0rem
 }
 
 *.footnote {
-	font-family: calibri,tahoma,arial,sans-serif ;
-	font-size:0.8rem;
-	color:grey;
+	font-family: calibri, tahoma, arial, sans-serif;
+	font-size: 0.8rem;
+	color: grey;
 }
 
 *.replybutton {
-	font-family: calibri,tahoma,arial,sans-serif ;
-	font-size:0.9rem;
-	color:blue;
+	font-family: calibri, tahoma, arial, sans-serif;
+	font-size: 0.9rem;
+	color: blue;
 }
 
 *.reportbutton {
-	font-family: calibri,tahoma,arial,sans-serif ;
-	font-size:0.9rem;
-	color:blue;
-}
-*.commentbutton {
-	font-family: calibri,tahoma,arial,sans-serif ;
-	font-size:0.9rem;
-	color:blue;
-}
-*.whlbutton {
-	font-family: calibri,tahoma,arial,sans-serif ;
-	font-size:0.9rem;
-	color:blue;
-	text-decoration: none ; 
-	
+	font-family: calibri, tahoma, arial, sans-serif;
+	font-size: 0.9rem;
+	color: blue;
 }
 
+*.commentbutton {
+	font-family: calibri, tahoma, arial, sans-serif;
+	font-size: 0.9rem;
+	color: blue;
+}
+
+*.whlbutton {
+	font-family: calibri, tahoma, arial, sans-serif;
+	font-size: 0.9rem;
+	color: blue;
+	text-decoration: none;
+}
 
 *.title {
-	font-family: calibri,tahoma,arial,sans-serif ;
-	font-size:1rem;
-	color:black;
+	font-family: calibri, tahoma, arial, sans-serif;
+	font-size: 1rem;
+	color: black;
 }
 
 span.title.linkrank1 {
-	font-family: calibri,tahoma,arial,sans-serif ;
-	font-size:1rem;
-	font-weight:bold;
-	color:black;
-	
+	font-family: calibri, tahoma, arial, sans-serif;
+	font-size: 1rem;
+	font-weight: bold;
+	color: black;
 }
 
 *.commentcount {
-	font-family: calibri,tahoma,arial,sans-serif ;
-	font-size:0.9rem;
-	color:black;
+	font-family: calibri, tahoma, arial, sans-serif;
+	font-size: 0.9rem;
+	color: black;
 }
 
 *.author {
-	font-family: calibri,tahoma,arial,sans-serif ;
-	font-size:0.8rem;
-	color:grey;
+	font-family: calibri, tahoma, arial, sans-serif;
+	font-size: 0.8rem;
+	color: grey;
 }
 
 div.formentry {
-	font-family: calibri,tahoma,arial,sans-serif ;
-	font-size:1rem;
-	color:black;
+	font-family: calibri, tahoma, arial, sans-serif;
+	font-size: 1rem;
+	color: black;
 }
 
 label, input, textarea {
-	font-family: calibri,tahoma,arial,sans-serif ;
-	font-size:1rem;
-	color:black;
+	font-family: calibri, tahoma, arial, sans-serif;
+	font-size: 1rem;
+	color: black;
 }
 
 textarea {
-	width:95%;
+	width: 95%;
 }
+
 hr {
-	width: 100% ;
+	width: 100%;
 	color: #ccc;
 	background-color: #ccc;
 	height: 1px;
-	align:left;
+	align: left;
 	border-top: 0px solid #8c8b8b;
 	border-bottom: 0px solid #fff;
 	margin: 0.5rem 0rem 0rem 0rem;
-	padding:0px;
+	padding: 0px;
 }
-
-
 
 dl, dt, dd {
 	margin: 0rem;
@@ -168,12 +169,12 @@ dl, dt, dd {
 }
 
 dd {
-	margin-left: 1rem;	
+	margin-left: 1rem;
 }
 
 *.replyicon {
-	width:0.7rem;
-	height:0.7rem;
+	width: 0.7rem;
+	height: 0.7rem;
 }
 
 *.linkouticon {
@@ -182,103 +183,117 @@ dd {
 }
 
 *.addicon {
-	width:0.6rem;
-	height:0.6rem;
+	width: 0.6rem;
+	height: 0.6rem;
 }
 
 *.menuicon {
-	width:1rem;
-	height:1rem;
+	width: 1rem;
+	height: 1rem;
 }
 
 *.flagicon, *.searchicon, *.observeicon, *.addfileicon, *.commenticon {
-	width:0.7rem;
-	height:0.7rem;
+	width: 0.7rem;
+	height: 0.7rem;
 }
 
 div.toggle {
 	border: 1px solid #ccc;
 	margin: 0.5rem auto;
-	display:none;
+	display: none;
 	box-shadow: -0.3rem 0.3rem 0.2rem #ccc;
 }
 
 div#menu {
-  position: fixed;
-  z-index: 1;
-  right: 1rem;
-  top: 1rem;
-  width: 3.5rem;
-  height: 8rem;
-  mmargin-top: -2.5em;
+	position: fixed;
+	z-index: 1;
+	right: 1rem;
+	top: 1rem;
+	width: 3.5rem;
+	height: 8rem;
+	mmargin-top: -2.5em;
 }
 
 div#toggleBy-pulldownmenu {
-	display:none;
+	display: none;
 	border: 0px solid #ccc;
-	margin:0rem;
-	padding:0rem;
-	float:right;
-	}
-
-#footer {
-  position: fixed;
-  z-index: 1;
-  left: 0rem;
-  bottom: 0rem;
-  width: 100%;
-  height: 1rem;
-  mmargin-top: -2.5em;
-  font-family: calibri,tahoma,arial,sans-serif;
-  background-color:lightgrey;
-  
+	margin: 0rem;
+	padding: 0rem;
+	float: right;
 }
 
+#footer {
+	position: fixed;
+	z-index: 1;
+	left: 0rem;
+	bottom: 0rem;
+	width: 100%;
+	height: 1rem;
+	mmargin-top: -2.5em;
+	font-family: calibri, tahoma, arial, sans-serif;
+	background-color: lightgrey;
+}
 
 td.menuitem {
-	background-color:#eee;
+	background-color: #eee;
 	border: 1px solid #888;
-	padding:0.5rem;
+	padding: 0.5rem;
 }
 
 a.menuitem {
-	text-decoration: none ; 
-	font-family: calibri,tahoma,arial,sans-serif ;
+	text-decoration: none;
+	font-family: calibri, tahoma, arial, sans-serif;
 	color: black;
-	font-size:1.6rem;
+	font-size: 1.6rem;
 }
 
 table.menu {
-	margin:0rem;
-	padding:0rem;
-    border: 0px solid #888;
-    border-collapse: collapse;
+	margin: 0rem;
+	padding: 0rem;
+	border: 0px solid #888;
+	border-collapse: collapse;
 }
 
 div#pulldownmenubutton {
-	text-align:right;
+	text-align: right;
 }
 
 div.searchform {
-	wwidth:80%;
+	wwidth: 80%;
 }
-
 
 img.logo {
-	width:1.2rem;
-	height:1.2rem;
+	width: 1.2rem;
+	height: 1.2rem;
 }
 
-input.search
-{
-	width:60%;
+input.search {
+	width: 60%;
 }
 
- input[type="text"] {
- 	width:60%;
- } 
- 
+input[type="text"] {
+	width: 60%;
+}
 
-​
+span.columndata, span.columnname {
+	font-family: calibri, tahoma, arial, sans-serif;
+	font-size: 0.9rem;
+	color: black;
+}
+
+span.columnname {
+	font-weight: bold;
+}
+
+a.linkurl {
+	color:blue;
+}
+
+
+a.whlbutton.activate {
+	color:red;
+}
+
+
 
 </style>

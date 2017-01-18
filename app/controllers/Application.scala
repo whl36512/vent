@@ -104,8 +104,8 @@ class Application @Inject() (implicit mailerClient: MailerClient, implicit val c
     Logger.info("INFO 20170117002912: "+ result)
     result match {
       case r if r.startsWith("Saved") => {
-        val sr=sendEmail ("new article:"+ r)
-        Logger.debug("DEBUG 20170117005223: " + sr)
+//        val sr=sendEmail ("new article:"+ r)
+//        Logger.debug("DEBUG 20170117005223: " + sr)
         Ok(r + "\nOur staff will review it and activate it for comments accordingly")
       }
       case r => BadRequest(r) 
@@ -219,6 +219,16 @@ class Application @Inject() (implicit mailerClient: MailerClient, implicit val c
       Ok("Result: " + result)
     }
   }
+
+  def linkInReview = Action { implicit request =>
+      Ok(views.html.admin.linkinreview(db))
+  }
+  
+  def activateLink = Action { implicit request =>
+      val linkId = request.getQueryString("linkId").getOrElse("")
+      Ok(SQLResult(db, "update link set status='A' where link_id=?::uuid returning * ", Array(linkId)).toString)
+  }
+
 
   def parseRequest(r: Request[AnyContent], fields: Array[String]) = {
     var fieldMap = Map[String, String]()

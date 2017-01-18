@@ -103,7 +103,10 @@ object Link {
     val urlObj = new URL(url)
     urlObj.getAuthority()
   }
-
+  
+  def linkInReview(db: Database) = {
+    SQLResult(db, "select * from link where status = 'R' order by create_ts desc", Array())
+  }
 }
 
 case class Msg(msgId: String = "", linkId: String = "", parentMsgId: String = "", createTS: String = "", content: String = "", ipHash: String = "") {

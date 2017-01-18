@@ -3,30 +3,13 @@
 @import models.Link
 @import scala.collection.mutable.ArrayBuffer
 
-@import play.api.db.Database ; var keys : Iterable[String] =null; var links : ArrayBuffer[Map[String,String]] =null
+@import play.api.db.Database
 
-@(db: Database)(implicit request: RequestHeader, m: Messages)
+@(columnNames: List[String], rows: ArrayBuffer[Map[String, String]])(implicit request: RequestHeader, m: Messages)
 
 @main("Beegrove, Links In Review") {
-	@{links=Link.linkInReview(db)}
-	@{keys=links(0).keys}
-	
-	@for(l <- links) {
-		<form action="/admin/savelink"  method=POST >
-		@for( k <- keys ) {
-			<span class=columnname>@k :</span> 
-			<input type=text name="@k" value="@l(k)" class=columndata /><br/>
-			@if(k.equals("url")) {
-				<a href="@l(k)" target="_blank" class=linkurl > @l(k)</a> &nbsp;&nbsp;&nbsp; 
-				<aa href='/admin/activatelink?linkId=@l("link_id")' class="whlbutton activate" target="_blank" >  </aa>
-				<br/>
-			}
-			
-			
-		}
-		<button type=submit>Save</button>
-		</form>
-		<p/>
+	@for(r <- rows) {
+		@linkform(columnNames, r)	
 	}
 		
 }

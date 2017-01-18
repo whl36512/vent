@@ -280,3 +280,79 @@ $body$
 $body$
 language sql;
 
+create or replace function update_link (
+	  link_id text
+	, topic_id text
+	, title text
+	, publish_ts text
+ 	, create_ts  text
+	, author text
+	, url text
+	, language text
+	, comment_cnt text
+	, search_text text
+	, status text
+)
+returns table  ( 
+	  link_id uuid
+	, topic_id uuid
+	, title text
+	, publish_ts timestamp with time zone
+ 	, create_ts  timestamp with time zone
+	, author text
+	, url text
+	, language text
+	, comment_cnt integer
+	, search_text tsvector
+	, status character
+)
+as
+$body$
+	with a as 
+	(
+		select 
+	  		  $1 ::uuid 			link_id 
+			, $2 ::uuid  			topic_id 
+			, $3 ::text 			title 
+			, $4 ::timestamp with time zone  publish_ts
+ 			, $5 ::timestamp with time zone  create_ts
+			, $6 ::text 			author
+			, $7 ::text 			url 
+			, $8 ::text 			lang
+			, $9 ::integer 			comment_cnt 
+			, $10 ::tsvector 		search_text
+			, $11 ::text 			status 
+		limit 1
+	)
+	update link l 
+	set           
+			(
+        			  topic_id 
+        			, title 
+        			, publish_ts 
+        			, create_ts 
+        			, author 
+        			, url 
+        			, language 
+        			, comment_cnt 
+        			, search_text
+        			, status 
+			) =	(
+				  a.topic_id 
+				, a.title
+				, a.publish_ts
+ 				, a.create_ts
+				, a.author
+				, a.url 
+				, a.lang
+				, a.comment_cnt 
+				, to_tsvector(a.lang::regconfig, coalesce(a.title,'') || ' ' || coalesce(a.author,'')) 
+				, a.status
+			)
+	from a
+	where l.link_id = a.link_id
+	returning l.*
+	;
+$body$
+language sql;
+

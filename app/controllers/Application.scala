@@ -58,11 +58,10 @@ class Application @Inject() (implicit mailerClient: MailerClient, implicit val c
   def about = Action {
     Ok(views.html.about())
   }
-  
+
   def terms = Action {
     Ok(views.html.terms())
   }
-  
 
   def topicList = {
     val caching = cached.status({ r: RequestHeader => r.uri }, 200, 10).includeStatus(404, 100)
@@ -101,16 +100,16 @@ class Application @Inject() (implicit mailerClient: MailerClient, implicit val c
 
     val link = Link(topicId = queryString("topicId"), url = queryString("url"), publishTS = queryString("publishTS"), author = queryString("author"), title = queryString("title"))
     val result = link.saveTo(db)(0).get("result").getOrElse("ERROR 20161231130101: Unknown error")
-    Logger.info("INFO 20170117002912: "+ result)
+    Logger.info("INFO 20170117002912: " + result)
     result match {
       case r if r.startsWith("Saved") => {
-//        val sr=sendEmail ("new article:"+ r)
-//        Logger.debug("DEBUG 20170117005223: " + sr)
+        //        val sr=sendEmail ("new article:"+ r)
+        //        Logger.debug("DEBUG 20170117005223: " + sr)
         Ok(r + "\nOur staff will review it and activate it for comments accordingly")
       }
-      case r => BadRequest(r) 
+      case r => BadRequest(r)
     }
-    
+
     //    Ok(link.saveTo(db)(0).toString)
     //Redirect(routes.Application.newTopic()).flashing("success" -> ("Successful " + topic.toString))
   }
@@ -182,7 +181,7 @@ class Application @Inject() (implicit mailerClient: MailerClient, implicit val c
 
       val msg = Msg(linkId = linkId, parentMsgId = msgId, content = content, ipHash = ipHash)
       msg.validate match {
-        case "" => {  // no error
+        case "" => { // no error
           val result = msg.saveTo(db)(0)("cnt")
           cache.set(ipHash, userThrottle, 60.minutes)
           Ok("Result: " + result + """ comment saved. """)
@@ -221,14 +220,27 @@ class Application @Inject() (implicit mailerClient: MailerClient, implicit val c
   }
 
   def linkInReview = Action { implicit request =>
-      Ok(views.html.admin.linkinreview(db))
-  }
-  
-  def activateLink = Action { implicit request =>
-      val linkId = request.getQueryString("linkId").getOrElse("")
-      Ok(SQLResult(db, "update link set status='A' where link_id=?::uuid returning * ", Array(linkId)).toString)
+    var links = Link.linkInReview(db)
+    if (links.length > 0 ) { 
+      var columnNames = links(0).keySet.toList.sorted
+      Ok(views.html.admin.linkinreview(columnNames, links))
+    }
+    else Ok ("INFO 20170118151132: Query retun no rows")
   }
 
+  def activateLink = Action { implicit request =>
+    val linkId = request.getQueryString("linkId").getOrElse("")
+    Ok(SQLResult(db, "update link set status='A' where link_id=?::uuid returning * ", Array(linkId)).toString)
+  }
+
+  def adminUpdateLink = Action { implicit request =>
+    val queryString = request.body.asFormUrlEncoded.get.map { case (k, v) => (k, v(0)) } // get form data from POST
+    val params =
+      Array("link_id", "topic_id", "title", "publish_ts", "create_ts", "author", "url", "language", "comment_cnt", "search_text", "status").map { k => queryString(k) }
+    Logger.debug("DEBUG 20170118141935:" + params.toString)
+    val r = SQLResult(db, "select * from update_link(?,?,?,?,?,?,?,?,?,?,?)", params)
+    Ok(r.toString)
+  }
 
   def parseRequest(r: Request[AnyContent], fields: Array[String]) = {
     var fieldMap = Map[String, String]()
@@ -241,28 +253,25 @@ class Application @Inject() (implicit mailerClient: MailerClient, implicit val c
     }
     fieldMap
   }
-  
-  def sendEmail (msg :String) = {
+
+  def sendEmail(msg: String) = {
     //val cid = "1234"
     val email = Email(
-      subject=msg
-      , from="Mister FROM <whl365121@gmail.com>"
-      , to=Seq("Miss TO <whl365121@gmail.com>")
-    // adds attachment
-//    attachments = Seq(
-//      AttachmentFile("attachment.pdf", new File("/some/path/attachment.pdf")),
-//      // adds inline attachment from byte array
-//      AttachmentData("data.txt", "data".getBytes, "text/plain", Some("Simple data"), Some(EmailAttachment.INLINE)),
-//      // adds cid attachment
-//      AttachmentFile("image.jpg", new File("/some/path/image.jpg"), contentId = Some(cid))
-//    ),
-    // sends text, HTML or both...
-//    bodyText = Some("A text message"),
-//    bodyHtml = Some(s"""<html><body><p>An <b>html</b> message with cid <img src="cid:$cid"></p></body></html>""")
-  )
+      subject = msg, from = "Mister FROM <whl365121@gmail.com>", to = Seq("Miss TO <whl365121@gmail.com>") // adds attachment
+      //    attachments = Seq(
+      //      AttachmentFile("attachment.pdf", new File("/some/path/attachment.pdf")),
+      //      // adds inline attachment from byte array
+      //      AttachmentData("data.txt", "data".getBytes, "text/plain", Some("Simple data"), Some(EmailAttachment.INLINE)),
+      //      // adds cid attachment
+      //      AttachmentFile("image.jpg", new File("/some/path/image.jpg"), contentId = Some(cid))
+      //    ),
+      // sends text, HTML or both...
+      //    bodyText = Some("A text message"),
+      //    bodyHtml = Some(s"""<html><body><p>An <b>html</b> message with cid <img src="cid:$cid"></p></body></html>""")
+      )
     mailerClient.send(email)
   }
-  
+
 }
 
 

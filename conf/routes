@@ -36,3 +36,4 @@ GET		/credit				controllers.Application.credit
 GET		/terms				controllers.Application.terms
 GET		/admin/linkinreview				controllers.Application.linkInReview
 GET		/admin/activatelink				controllers.Application.activateLink
+POST	/admin/updatelink					controllers.Application.adminUpdateLink

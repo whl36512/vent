@@ -1,0 +1,19 @@
+@* linkform Template File *@
+
+@(columnNames: Iterable[String], row: Map [String, String])(implicit request: RequestHeader, m: Messages)
+
+<div class=linkform>
+	<form action="/admin/updatelink"  method=POST target ="_blank">
+		@for( k <- columnNames ) {
+			<span class=columnname>@k :</span> 
+			<input type=text name="@k" value="@row(k)" class=columndata /><br/>
+			@if(k.equals("url")) {
+				<a href="@row(k)" target="_blank" class=linkurl > @row(k)</a> &nbsp;&nbsp;&nbsp; 
+				<aa href='/admin/activatelink?linkId=@row("link_id")' class="whlbutton activate" target="_blank" >  </aa>
+				<br/>
+			}
+		}
+		<button type=submit>Save</button>
+		</form>
+		<p/>
+</div>

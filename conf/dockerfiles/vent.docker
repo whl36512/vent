@@ -3,8 +3,9 @@ MAINTAINER "you" <your@email.here>
 ENV container docker
 
 RUN yum install -y java
-ADD ./vent-1.0-SNAPSHOT.tgz /root/.
-RUN cp /root/vent-1.0-SNAPSHOT/conf/systemd/vent.service /lib/systemd/system/.
+ADD ./vent-1.2-SNAPSHOT.tgz /root/.
+RUN ln -s /root/vent-1.2-SNAPSHOT /root/vent
+RUN cp /root/vent/conf/systemd/vent.service /lib/systemd/system/.
 RUN systemctl enable vent.service
 EXPOSE 9000
 

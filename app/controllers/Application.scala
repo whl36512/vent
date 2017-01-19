@@ -64,9 +64,11 @@ class Application @Inject() (implicit mailerClient: MailerClient, implicit val c
   }
 
   def topicList = {
+    
     val caching = cached.status({ r: RequestHeader => r.uri }, 200, 10).includeStatus(404, 100)
     caching {
       Action { implicit request =>
+        Logger.info("INFO 20170118221234: ipHash=" + Msg.hashIp(request.remoteAddress) + " uri=" + request.uri)
         Ok(views.html.topiclist(db))
       }
     }
@@ -105,7 +107,7 @@ class Application @Inject() (implicit mailerClient: MailerClient, implicit val c
       case r if r.startsWith("Saved") => {
         //        val sr=sendEmail ("new article:"+ r)
         //        Logger.debug("DEBUG 20170117005223: " + sr)
-        Ok(r + "\nOur staff will review it and activate it for comments accordingly")
+        Ok(r + "\n\nOur staff will review it and activate it for comments accordingly")
       }
       case r => BadRequest(r)
     }
@@ -118,6 +120,7 @@ class Application @Inject() (implicit mailerClient: MailerClient, implicit val c
     val caching = cached.status({ r: RequestHeader => r.uri }, 200, 20).includeStatus(404, 100)
     caching {
       Action { implicit request =>
+        Logger.info("INFO 20170118221234: ipHash=" + Msg.hashIp(request.remoteAddress) + " uri=" + request.uri)
         val queryString = request.queryString.map { case (k, v) => (k, v(0)) } // one key has only one value        
         Ok(views.html.comments(db, queryString.get("linkId").getOrElse(""), queryString.get("topicId").getOrElse("")))
       }

@@ -225,15 +225,10 @@ class Application @Inject() (implicit mailerClient: MailerClient, implicit val c
       var columnNames = links(0).keySet.toList.sorted
       Ok(views.html.admin.linkinreview(columnNames, links))
     }
-    else Ok ("INFO 20170118151132: Query retun no rows")
+    else Ok ("INFO 20170118151132: Query returns no row")
   }
 
-  def activateLink = Action { implicit request =>
-    val linkId = request.getQueryString("linkId").getOrElse("")
-    Ok(SQLResult(db, "update link set status='A' where link_id=?::uuid returning * ", Array(linkId)).toString)
-  }
-
-  def adminUpdateLink = Action { implicit request =>
+ def adminUpdateLink = Action { implicit request =>
     val queryString = request.body.asFormUrlEncoded.get.map { case (k, v) => (k, v(0)) } // get form data from POST
     val params =
       Array("link_id", "topic_id", "title", "publish_ts", "create_ts", "author", "url", "language", "comment_cnt", "search_text", "status").map { k => queryString(k) }

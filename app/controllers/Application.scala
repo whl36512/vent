@@ -235,7 +235,6 @@ class Application @Inject() (implicit mailerClient: MailerClient, implicit val c
     val queryString = request.body.asFormUrlEncoded.get.map { case (k, v) => (k, v(0)) } // get form data from POST
     val params =
       Array("link_id", "topic_id", "title", "publish_ts", "create_ts", "author", "url", "language", "comment_cnt", "search_text", "status").map { k => queryString(k) }
-    Logger.debug("DEBUG 20170118141935:" + params.toString)
     val r = SQLResult(db, "select * from update_link(?,?,?,?,?,?,?,?,?,?,?)", params)
     Ok(r.toString)
   }

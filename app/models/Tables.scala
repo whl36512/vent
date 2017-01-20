@@ -40,23 +40,23 @@ case class Link(linkId: String = "", topicId: String = "", title: String = "", p
       case e: MalformedURLException => return ArrayBuffer(Map("result" -> "ERROR 20121231: Invalid URL"))
     }
 
-    try {
-      val dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-      val parsedDate = dateFormat.parse(publishTS);
-      val timestamp = new java.sql.Timestamp(parsedDate.getTime());
-    } catch {
-      case e: Exception => {
-        try {
-          val dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-          val parsedDate = dateFormat.parse(publishTS);
-          val timestamp = new java.sql.Timestamp(parsedDate.getTime());
-
-        } catch {
-          case e: Exception => return ArrayBuffer(Map("result" -> "ERROR 201231120101: Invalid timestamp"))
-        }
-      }
-
-    }
+//    try {
+//      val dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//      val parsedDate = dateFormat.parse(publishTS);
+//      val timestamp = new java.sql.Timestamp(parsedDate.getTime());
+//    } catch {
+//      case e: Exception => {
+//        try {
+//          val dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//          val parsedDate = dateFormat.parse(publishTS);
+//          val timestamp = new java.sql.Timestamp(parsedDate.getTime());
+//
+//        } catch {
+//          case e: Exception => return ArrayBuffer(Map("result" -> "ERROR 201231120101: Invalid timestamp"))
+//        }
+//      }
+//
+//    }
     SQLResult(db, " select * from save_link(?,?,?,?,?,?)", Array(topicId, title, publishTS, author, url, language))
   }
 }

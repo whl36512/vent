@@ -35,4 +35,5 @@ POST	/savetopic			controllers.Application.saveTopic
 GET		/credit				controllers.Application.credit
 GET		/terms				controllers.Application.terms
 GET		/admin/linkinreview				controllers.Application.linkInReview
+GET		/admin/lr				controllers.Application.linkInReview
 POST	/admin/updatelink					controllers.Application.adminUpdateLink

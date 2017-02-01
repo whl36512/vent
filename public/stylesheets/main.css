@@ -1,10 +1,21 @@
 
-<!--
-CSS goes in the document HEAD or added to your external stylesheet --> <style type
-	="text/css">a {
+<!--CSS goes in the document HEAD or added to your external stylesheet --> 
+<style type="text/css">
+
+xyz {
+		border-width: 0px;
+}
+
+body {
+	background-color: #efe;
+	font-family: calibri, tahoma, arial, sans-serif;
+	
+}
+
+a {
 	text-decoration: none;
 	font-weight: normal !important;
-	color: red !important;
+	color: blue !important;
 	font-family: calibri, tahoma, arial, sans-serif;
 }
 
@@ -72,12 +83,6 @@ div.credit {
 	text-decoration: none;
 }
 
-div.commentblock {
-	border-style: solid;
-	border-color: red green blue #bbf;
-	border-width: 0rem 0rem 0rem 0.2rem;
-	margin: 0.4rem 0rem 0rem 0rem
-}
 
 *.footnote {
 	font-family: calibri, tahoma, arial, sans-serif;
@@ -197,11 +202,21 @@ dd {
 	height: 0.7rem;
 }
 
-div.toggle {
-	border: 1px solid #ccc;
-	margin: 0.5rem auto;
+div.toggle, div.topicblock, div.commentblock {
+	background-color: white;
+	border-style: solid;
+	border-color: red green blue orange;
+	border-width: 0rem 0rem 0rem 0.2rem;
+	margin: 0.4rem 0rem 0.4rem 0rem;
+	border-radius: 0.5rem;
+	padding: 0rem 0rem 0rem 0.2rem;
+	box-shadow: -0.2rem 0.2rem 0.2rem #ccc;
+
+
+}
+
+div.toggle  {
 	display: none;
-	box-shadow: -0.3rem 0.3rem 0.2rem #ccc;
 }
 
 div#menu {
@@ -293,6 +308,7 @@ a.linkurl {
 a.whlbutton.activate {
 	color:red;
 }
+
 
 
 

@@ -16,34 +16,35 @@
 		
    	</dt>
 </dl>
+<div>
 
 	@for(l <- Link.select(db, request)){
    		@{
    			// request may have searchQuery
    		}
    		
-	   	<dl>
-   			<dt>
-				@if( l("rk_link").equals("1")){
-					<hr/>
-					<a href='comments?topicId=@l("topic_id")' class="whlbutton" >
-						<img src="/assets/images/observe.svg" alt=See class=observeicon>
-			 			View @l("total") comments in this group of articles
-			 		</a>
-					&nbsp; &nbsp;
-					@newtopic("Suggest a similar news article", l("topic_id"))
+	   	
+		@if( l("rk_link").equals("1")){
+			</div>
+			<div class=topicblock>
+				<a href='comments?topicId=@l("topic_id")' class="whlbutton" >
+					<img src="/assets/images/observe.svg" alt=See class=observeicon>
+		 			View @l("total") comments in this group of articles
+		 		</a>
+				&nbsp; &nbsp;
+				@newtopic("Suggest a similar news article", l("topic_id"))
 					
-				}
-	   		</dt>
-
-   			<dd>
-   				<span class='title linkrank@l("rk_link")' >
+		}
+		<dl>
+			<dd>
+	   	   		<span class='title linkrank@l("rk_link")' >
    					@l("title")
    				</span>   		
    				<a href ='@l("url")' target="_blank"> 
    					<img src="/assets/images/external-link-symbol.svg" alt="Linkout" title="Read it" class=linkouticon>
 	   	 		</a>
-   	 	
+	 		</dd>
+   			<dd>
    				<dl>
    					<dd class=date>
    						by @l("author"), @Link.getOrgByURL(l("url")), @l("publish_ts")
@@ -54,12 +55,13 @@
    							View @l("comment_cnt") Comments
    						</a> 
    					</dd>
-	   			</dl>
+   				</dl>
    			</dd>
-   		</dl>
-    }
+		</dl>
+   	}
+</div>
+   	
 }
-
 
 @newtopic(wording: String, topicId: String) = {
 	<a href="#/" id="@topicId" class=whlbutton onClick="toggleDisply(this.id);" >

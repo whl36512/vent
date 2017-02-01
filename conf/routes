@@ -18,22 +18,22 @@ GET     /message                    controllers.AsyncController.message
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 
-GET     /comments                    controllers.Application.comments
-#POST    /comment                    controllers.Application.commentPost
+GET     /comments                   	controllers.Application.comments
+#POST    /comment                    	controllers.Application.commentPost
 
-POST    /commentconfirm                    controllers.Application.commentConfirmPost
+POST    /commentconfirm					controllers.Application.commentConfirmPost
 
-GET     /                    controllers.Application.topicList
+GET     /                    			controllers.Application.topicList
 
-GET     /topiclist                    controllers.Application.topicList
-#GET     /newtopic              controllers.Application.newTopic
-#POST    /newtopic             controllers.Application.newTopicPost
+GET     /topiclist                    	controllers.Application.topicList
+#GET     /newtopic              		controllers.Application.newTopic
+#POST    /newtopic             			controllers.Application.newTopicPost
 
-GET     /flag                 controllers.Application.flag
-POST	/savecomment			controllers.Application.saveComment
-POST	/savetopic			controllers.Application.saveTopic
-GET		/credit				controllers.Application.credit
-GET		/terms				controllers.Application.terms
+GET     /flag                 			controllers.Application.flag
+POST	/savecomment					controllers.Application.saveComment
+POST	/savetopic						controllers.Application.saveTopic
+GET		/credit							controllers.Application.credit
+GET		/terms							controllers.Application.terms
 GET		/admin/linkinreview				controllers.Application.linkInReview
-GET		/admin/lr				controllers.Application.linkInReview
-POST	/admin/updatelink					controllers.Application.adminUpdateLink
+GET		/admin/lr						controllers.Application.linkInReview
+POST	/admin/updatelink				controllers.Application.adminUpdateLink

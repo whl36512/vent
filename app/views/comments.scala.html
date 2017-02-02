@@ -9,7 +9,7 @@
 
 @indentOpen( level:String )  = @{ 
 	var out =""
-	for (i <- 1 until level.toInt)  {
+	for (i <- 1 until level.toInt +1 )  {
 	out +="<dl><dd>"
 	}
 	out
@@ -17,7 +17,7 @@
 
 @indentClose( level:String ) = @{ 
 	var out = ""
-	for (i <- 1 until level.toInt)  {
+	for (i <- 1 until level.toInt +1 )  {
 	out+= "</dd></dl>"
 	}
 	out
@@ -63,14 +63,10 @@
 
 
 	@for(l <- Msg.selectOrderByTime(db, linkId, topicId)){   
-
 		@Html(indentOpen(level= l("level")) )
-
- 
 		<div class=commentblock>
 		<dl>
     		<dt class="date" >
-    	    	<hhr/>
     			on @l("create_ts")
     			&nbsp; &nbsp; 
     			@if(l("level").toInt <= 4) {
